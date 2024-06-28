@@ -1,60 +1,75 @@
-# ErrorHandling Smart Contract
+# Assessment Smart Contract
 
-This Solidity program is a simple smart contract that demonstrates the basic syntax and functionality of error handling in Solidity. The purpose of this program is to serve as a starting point for those who are new to Solidity and want to understand how to implement error handling using `require()`, `revert()`, and `assert()` statements.
+This Solidity smart contract, named `Assessment`, serves as a basic financial system that allows depositing and withdrawing funds, while enforcing ownership and handling errors gracefully.
 
 ## Description
 
-This program is a simple contract written in Solidity, a programming language used for developing smart contracts on the Ethereum blockchain. The contract includes functions that showcase the usage of `require()`, `revert()`, and `assert()` statements for error handling. This program serves as a straightforward introduction to Solidity error handling, and can be used as a foundation for more complex projects in the future.
+The `Assessment` contract is designed to manage Ether deposits and withdrawals. It ensures only the owner can deposit or withdraw funds and includes error handling to manage insufficient balance scenarios. The contract emits events for both deposit and withdrawal actions to provide transparency.
 
 ## Getting Started
 
-### Executing the Program
+### Prerequisites
 
-To run this program, you can use Remix, an online Solidity IDE. Follow these steps to get started:
+To deploy and interact with this contract, you will need:
 
-1. Go to the Remix website at [Remix Ethereum](https://remix.ethereum.org/).
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- [Hardhat](https://hardhat.org/)
+- An Ethereum wallet (e.g., MetaMask)
+- [Solidity](https://soliditylang.org/)
 
-2. Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a `.sol` extension (e.g., `ErrorHandling.sol`). Copy and paste the following code into the file:
+### Installing
 
-    ```solidity
-    // SPDX-License-Identifier: MIT
-    pragma solidity ^0.8.7;
+1. Clone the repository in your desired location:
+   ```sh
+   git clone https://github.com/MetacrafterChris/SCM-Starter.git
+   
+2. Open that particular installed folder.
 
-    contract ErrorHandling {
-        uint public num = 0; // Initial declaration
+3. Install dependencies:
+    ```sh
+    npm install 
 
-        // Function that uses require to validate input
-        function testRequire(uint _i) public pure {
-            require(_i > 10, "Input must be greater than 10");
-        }
+## Running the Project
 
-        // Function that uses revert to validate input
-        function testRevert(uint _i) public pure {
-            if (_i <= 10) {
-                revert("Input must be greater than 10"); // This will revert with the following error
-            }
-        }
+After cloning the GitHub repository, you will want to do the following to get the code running on your computer:
 
-        // Function that uses assert to check state
-        function testAssert() public view {
-            assert(num == 0); // Assert will check that num is 0 only.
-        }
-    }
-    ```
+1. Inside the project directory, in the terminal type:
+    ```sh
+    npm i
 
-3. To compile the code, click on the "Solidity Compiler" tab in the left-hand sidebar. Make sure the "Compiler" option is set to "0.8.7" (or another compatible version), and then click on the "Compile ErrorHandling.sol" button.
+2. Open two additional terminals in your VS Code.
 
-4. Once the code is compiled, you can deploy the contract by clicking on the "Deploy & Run Transactions" tab in the left-hand sidebar.
+3. In the second terminal type:
+    ```sh
+    npx hardhat node
 
-5. Select the "ErrorHandling" contract from the dropdown menu, and then click on the "Deploy" button.
+4. In the third terminal, deploy the contract to the local network:
+    ```sh
+    npx hardhat run --network localhost scripts/deploy.js
 
-6. Once the contract is deployed, you can interact with it by calling its functions:
-   - To test the `testRequire` function, input a value greater than 10.
-   - To test the `testRevert` function, input a value less than or equal to 10.
-   - To test the `testAssert` function, ensure `num` is zero (you can call this function directly to check the condition).
+5. Back in the first terminal, launch the front-end:
+    ```sh
+    npm run dev
+This will start the application at http://localhost:3000/.
 
-By following these steps, you can execute and test the error handling functions in the contract.
+## Contract Details
 
----
+### State Variables
 
-Feel free to explore and modify the code to better understand error handling in Solidity. This contract provides a simple yet powerful foundation for learning and developing more complex smart contracts with robust error handling mechanisms.
+- **address payable public owner:*** Stores the address of the contract owner.
+- **uint256 public balance:*** Tracks the current balance of the contract.
+
+### Functions
+- **function getBalance() public view returns(uint256):*** Returns the current balance of the contract.
+- **function deposit(uint256 _amount) public payable:*** Allows the owner to deposit funds into the contract. Emits a Deposit event.
+- **function withdraw(uint256 _withdrawAmount) public:*** Allows the owner to withdraw funds from the contract. Emits a Withdraw event.
+
+### Events
+
+- **event Deposit(uint256 amount):** Emitted when funds are deposited.
+- **event Withdraw(uint256 amount):** Emitted when funds are withdrawn.
+
+### Error Handling
+- **error InsufficientBalance(uint256 balance, uint256 withdrawAmount):*** Custom error for handling insufficient balance during withdrawal.
+
