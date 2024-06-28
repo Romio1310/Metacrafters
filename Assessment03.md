@@ -71,5 +71,5 @@ This will start the application at http://localhost:3000/.
 - **event Withdraw(uint256 amount):** Emitted when funds are withdrawn.
 
 ### Error Handling
-- **error InsufficientBalance(uint256 balance, uint256 withdrawAmount):*** Custom error for handling insufficient balance during withdrawal.
+- **error InsufficientBalance(uint256 balance, uint256 withdrawAmount):** Custom error for handling insufficient balance during withdrawal.
 
