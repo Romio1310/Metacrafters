@@ -57,13 +57,13 @@ This will start the application at http://localhost:3000/.
 
 ### State Variables
 
-- **address payable public owner:*** Stores the address of the contract owner.
-- **uint256 public balance:*** Tracks the current balance of the contract.
+- **address payable public owner:** Stores the address of the contract owner.
+- **uint256 public balance:** Tracks the current balance of the contract.
 
 ### Functions
-- **function getBalance() public view returns(uint256):*** Returns the current balance of the contract.
-- **function deposit(uint256 _amount) public payable:*** Allows the owner to deposit funds into the contract. Emits a Deposit event.
-- **function withdraw(uint256 _withdrawAmount) public:*** Allows the owner to withdraw funds from the contract. Emits a Withdraw event.
+- **function getBalance() public view returns(uint256):** Returns the current balance of the contract.
+- **function deposit(uint256 _amount) public payable:** Allows the owner to deposit funds into the contract. Emits a Deposit event.
+- **function withdraw(uint256 _withdrawAmount) public:** Allows the owner to withdraw funds from the contract. Emits a Withdraw event.
 
 ### Events
 
