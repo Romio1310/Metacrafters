@@ -23,7 +23,7 @@ To deploy and interact with the contract:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/mytoken.git
+   git clone https://github.com/Romio1310/Metacrafters.git
 2. Navigate to the project directory:   
     ```bash
     cd mytoken
