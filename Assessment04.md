@@ -82,32 +82,35 @@ After cloning the GitHub repository, you will want to do the following to get th
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
+//import "hardhat/console.sol";
+
 contract Assessment {
     address payable public owner;
     uint256 public balance;
 
-    event Deposit(uint256 amount);                                // two events: Deposit and Withdraw
+    event Deposit(uint256 amount);                                                  // two events: Deposit and Withdraw
     event Withdraw(uint256 amount);
 
-    constructor(uint initBalance) payable {                       //initializing and sets the contract deployer
+    constructor(uint initBalance) payable {                                         //initializing and sets the contract deployer
         owner = payable(msg.sender);
         balance = initBalance;
     }
 
-    function getBalance() public view returns(uint256){           // use to view the current balance of the account.
+    function getBalance() public view returns(uint256){                             // use to view the current balance of the account.
         return balance;
     }
 
     function deposit(uint256 _amount) public payable {
         uint _previousBalance = balance;
 
-        require(msg.sender == owner, "You are not the owner of this account"); //this will ensure for the owner
+        require(msg.sender == owner, "You are not the owner of this account");      //this will ensure for the owner
 
-        balance += _amount;
+        balance += _amount;                                                         
 
-        assert(balance == _previousBalance + _amount);            // assert transaction completed successfully
+        assert(balance == _previousBalance + _amount);                              // assert transaction completed successfully
 
-        emit Deposit(_amount);   //emit the deposit event
+        // emit the event
+        emit Deposit(_amount);
     }
 
     // custom error
@@ -123,13 +126,14 @@ contract Assessment {
             });
         }
 
-        balance -= _withdrawAmount;                               //withdraws the given amount
+        balance -= _withdrawAmount;                                 //withdraws the given amount
 
-        assert(balance == (_previousBalance - _withdrawAmount));  //assert the balance is correct
+        assert(balance == (_previousBalance - _withdrawAmount));    //assert the balance is correct
 
-        emit Withdraw(_withdrawAmount);                           // emit the event
+        emit Withdraw(_withdrawAmount);                             // emit the event
     }
 }
+
 
 ```
 ## Hardhat Configuration
